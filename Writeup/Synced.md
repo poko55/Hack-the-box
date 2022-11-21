@@ -6,7 +6,12 @@ nmap -sV -sC  $ip
 # 2.Rsync
 
 ## rsync connect
-`rsync --list-only $ip::public/flag.txt flag.txt`
+`rsync --list-only $ip::`   
+![ea43e3f51d026860d5ead2bd734b7d3c.png](../_resources/ea43e3f51d026860d5ead2bd734b7d3c.png)
+
+## public check 
+![0690187126c862805dab40ec9dbf923d.png](../_resources/0690187126c862805dab40ec9dbf923d.png)
 
 ## flag get
+`rsync --list-only $ip::public/flag.txt flag.txt`
 ![d25ebfa5675b970b402df89104746a19.png](../_resources/d25ebfa5675b970b402df89104746a19.png)
