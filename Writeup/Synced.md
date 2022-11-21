@@ -10,7 +10,7 @@ nmap -sV -sC  $ip
 ![ea43e3f51d026860d5ead2bd734b7d3c.png](../_resources/ea43e3f51d026860d5ead2bd734b7d3c.png)
 
 ## public check 
-`rsync --list-only &ip::public` 
+`rsync --list-only &ip::public`    
 ![0690187126c862805dab40ec9dbf923d.png](../_resources/0690187126c862805dab40ec9dbf923d.png)
 
 ## flag get
