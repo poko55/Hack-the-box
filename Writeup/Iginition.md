@@ -1,5 +1,6 @@
 # 1.Port Scan
 ip=10.129.167.249
+
 nmap -sC -sV $ip
 
 ![ccd7ca1acd2ebc1ef3b8dc1af2bcb3a9.png](../_resources/ccd7ca1acd2ebc1ef3b8dc1af2bcb3a9.png)
