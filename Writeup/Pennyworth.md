@@ -2,6 +2,7 @@
 ip=10.129.169.55
 
 nmap -sC -sV $ip
+
 ![f261ce4bd8590cf9e85e6aa0f8be7f93.png](../_resources/f261ce4bd8590cf9e85e6aa0f8be7f93.png)
 
 # 2.Jenkins Login
