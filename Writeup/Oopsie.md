@@ -97,6 +97,7 @@ db.php内のユーザ情報を取得
 ![54ea79e33302eb51168b56b83b5b19ab.png](../_resources/54ea79e33302eb51168b56b83b5b19ab.png)
 
 Bug Trackerは/root/reportsディレクリ内にcatを使用することを確認
+
 ![f5982646e76314fb6222c9e8a0486f5e.png](../_resources/f5982646e76314fb6222c9e8a0486f5e.png)
 
 catに"bin/sh"を入れrootまでのパスを設定する
