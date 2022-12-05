@@ -99,11 +99,12 @@ $ id
 
 ![e94d29e48284f38c2fa98e56063bb7b6.png](../_resources/e94d29e48284f38c2fa98e56063bb7b6.png)
 
-bug trackerの場所を確認
+bugtrackerグループに所属していることを確認
 
-$locate bugtracker
+$ find / -type f -group bugtracker 2>/dev/null
 
-![54ea79e33302eb51168b56b83b5b19ab.png](../_resources/54ea79e33302eb51168b56b83b5b19ab.png)
+![ec85784a340fd51ae816a796226c8997.png](../_resources/ec85784a340fd51ae816a796226c8997.png)
+
 
 bugtrackerがSUIDを所持している事を確認
 
