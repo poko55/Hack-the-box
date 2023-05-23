@@ -8,13 +8,13 @@ sudo nmap -sC -sV $ip
 
 # #2\. 対象HP/ディレクトリを検索
 
-スキャンしたHPにアクセスを試行した。
+スキャンしたHPにアクセスした。
 
 http://$ip
 
 ![08de5aeb10b8338e732eab98c7166b66.png](../_resources/08de5aeb10b8338e732eab98c7166b66.png)
 
-gobusterでディレクトリを検索を実施した。
+gobusterでディレクトリの検索を実施した。
 
 gobuster dir --url http://$ip/ --wordlist /usr/share/wordlists/dirb/big.txt
 
@@ -26,7 +26,7 @@ gobuster dir --url http://$ip/ --wordlist /usr/share/wordlists/dirb/big.txt
 
 ![25abc6d10d9eedfd09ae575de04359fc.png](../_resources/25abc6d10d9eedfd09ae575de04359fc.png)
 
-/torrentディレクトリにアクセスした。
+/torrentディレクトリにアクセスを実施した。
 
 `http://$ip/torrent/`
 
@@ -138,10 +138,10 @@ Chatgptから
 
 ![06b2e50269c703a0e10cadab1506cac9.png](../_resources/06b2e50269c703a0e10cadab1506cac9.png)
 
-root権限を取得
+root権限を取得した。
 
 ![aa081156d786cd2a3cdc7924fdfe2194.png](../_resources/aa081156d786cd2a3cdc7924fdfe2194.png)
 
-root.txtを取得
+root.txtを取得した。
 
 ![4bd21729356b6a61d6dd378fdd2f6b9b.png](../_resources/4bd21729356b6a61d6dd378fdd2f6b9b.png)
