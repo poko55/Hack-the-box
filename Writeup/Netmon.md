@@ -4,11 +4,11 @@ $ip=10.10.10.152
 
 sudo nmap -sC -sV -Pn $ip
 
--sC  対象のポートやサービスにスクリプトを実行する。
+-sC  対象のポートやサービスにスクリプトを実行するためのオプション。
 
 -sV サービスバージョンの検出を目的としたスキャンを実行するためのオプション
 
--Pn ホスト検出をスキップする。pingを打たずにポートスキャンを実施する。
+-Pn ホスト検出をスキップする。pingを打たずにポートスキャンを実施するオプション。
 
 ![9a6c9fc718661608b431b40ea1163f29.png](../_resources/9a6c9fc718661608b431b40ea1163f29.png)
 
@@ -20,9 +20,9 @@ PRTG bandwidth monitor
 
 SMB
 
-の3種類のサービスが使われてるのを確認できる。
+の3種類のサービスが使われてるのを確認した。
 
-スキャンした結果、赤枠内のPRTGのバージョンが判明した為、googleから検索した結果、CVE-2018-9276の脆弱性が利用できる。
+スキャンした結果、赤枠内のPRTGのバージョンが判明した為、googleから検索した結果、CVE-2018-9276の脆弱性が利用できるのを確認した。
 
 参考URL:`https://github.com/A1vinSmith/CVE-2018-9276.git`
 
@@ -62,13 +62,13 @@ nmapの実行結果から検知したサービスの情報と思われるもの�
 
 デフォルトのインストール先がprogramdataに設定されている事をPaessler公式ページのSUPPORTから確認した。
 
-ftpサーバへ接続は可能な為、同サーバ内からprogramdataディレクトリにアクセスできる事を確認する。
+ftpサーバへ接続は可能な為、同サーバ内からprogramdataディレクトリにアクセスできる事を確認した。
 
 `ls`
 
 ![919951ffcf4eef7b04fb89d1803a9e2d.png](../_resources/919951ffcf4eef7b04fb89d1803a9e2d.png)
 
-lsコマンドでは表示されなかった為 -laオプションで試行してみる。
+lsコマンドでは表示されなかった為 -laオプションで試行した。
 
 `ls -la`
 
@@ -84,7 +84,7 @@ hidden属性を含めたファイルを表示nmapで検出したサービス名�
 
 ![432de8bdd9419b0f6b695dcda9503c6d.png](../_resources/432de8bdd9419b0f6b695dcda9503c6d.png)
 
-設定ファイルと思しき複数のファイルを確認したため解析の為にダウンロードする。
+設定ファイルと思しき複数のファイルを確認したため解析の為にダウンロードした。
 
 mget PRTG*
 
@@ -94,13 +94,13 @@ mget PRTG*
 
 `cat ./PRTG\ Configuration.dat | grep -B 3 -A 3 credential`
 
-PRTG Configuration.datを解析したが有用な情報は確認できない。
+PRTG Configuration.datを解析したが有用な情報は確認できなかった。
 
 ![52c1cad51aae6289a2b820b9e2557adb.png](../_resources/52c1cad51aae6289a2b820b9e2557adb.png)
 
 `cat ./PRTG\ Configuration.old | grep -B 3 -A 3 credential`
 
-PRTG　Congiguration.oldを解析したが有用な情報は確認できない。
+PRTG　Congiguration.oldを解析したが有用な情報は確認できなかった。
 
 ![2ea98b2f78f3df837a0c82a4e7fac2b4.png](../_resources/2ea98b2f78f3df837a0c82a4e7fac2b4.png)
 
@@ -117,13 +117,15 @@ PRTG　Configuration.old.bakを確認した所、ユーザIDとパスワード�
 ![d1c0f3386449415d710e8c67f61322f6.png](../_resources/d1c0f3386449415d710e8c67f61322f6.png)
 
 パスワードは PrTg@dmin2018
-ではなくPrTg@dmin2019と推測する。
+ではなくPrTg@dmin2019と推測した。
 
 ![2f6b29b3a0646ad3a86c086fafabeb40.png](../_resources/2f6b29b3a0646ad3a86c086fafabeb40.png)
 
 ログイン成功する。
 
 # 5\. PRTGに侵入する
+
+* * *
 
 # ![53f6aee3f9146c7ff86701b83b2c3013.png](../_resources/53f6aee3f9146c7ff86701b83b2c3013.png)
 
@@ -141,15 +143,15 @@ Add new Notification
 
 ![94a809760f8a5f772e7cb1af9c5decf9.png](../_resources/94a809760f8a5f772e7cb1af9c5decf9.png)
 
-6.OSインジェクションを試行する。
+# 6.OSインジェクションを試行する。
 
 program file Demo exe notification – outfile.ps1
 
 parameterにtest.txt;net user pentestop P3nT3st! /add;net localgroup administrators pentestop /add
 
-net user ユーザアカウントを追加する。
+net user ユーザアカウントを追加した。
 
-net localgroup administrators 　指定したユーザを管理者グループに追加する。
+net localgroup administrators 　指定したユーザを管理者グループに追加した。
 
 username prtgadmin
 
@@ -171,9 +173,11 @@ smbmapで確認した結果、管理者権限で共有フォルダに接続で�
 
 ![1a5ec544d7e4ed8939519bb0567bac9e.png](../_resources/1a5ec544d7e4ed8939519bb0567bac9e.png)
 
-パーミッションを確認した結果、管理共有C$ ADMIN$ がREAD,WRITEが許可されている為。
+パーミッションを確認した結果、管理共有C$ ADMIN$ がREAD,WRITEが許可されている為psexec.pyが使用できると推測した。
 
-psexec.pyを使用してリモートアクセスを試行する。
+psexec.pyを使用してリモートアクセスを試行した。
+
+psexec.pyは、IMPACKET Pythonモジュールに含まれる侵入テストスクリプトの一つです。このスクリプトは、Core Labsから提供されているIMPACKETツールセットの一部であり、侵入テストやセキュリティ評価のために使用されます。
 
 `python3 psexec.py 'pentestop:P3nT3st!@10.10.10.152'`
 
