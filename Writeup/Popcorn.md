@@ -116,11 +116,11 @@ cd george
 
 exploit databaseから
 
-Linux Kernel 3.6.37 攻撃用コードを取得
+Linux Kernel 3.6.37 攻撃用コードを取得した。
 
 ![ff5a0f5ab762921e54f312c505f9fda5.png](../_resources/ff5a0f5ab762921e54f312c505f9fda5.png)
 
-今回はduty cawと呼ばれる脆弱性を利用して攻撃する
+今回はduty cawと呼ばれる脆弱性を利用して攻撃した。
 
 Chatgptから
 
@@ -130,11 +130,11 @@ Chatgptから
 
 また、SELinux（Security-Enhanced Linux）のポリシーによって、攻撃可能な範囲が制限されていることも報告されていますが、Androidにも「Dirty COW」の脆弱性が存在するとされています\[2\]。トレンドマイクロは、既報告の攻撃とは異なる「Dirty COW」を利用した別の攻撃手法を確認しています。
 
-ローカルサーバを立てる
+ローカルサーバを立てた・
 
 ![75bb57eec9d2b62de1541109c49773cb.png](../_resources/75bb57eec9d2b62de1541109c49773cb.png)
 
-ローカルサーバから15704.cをダウンロード
+ローカルサーバから15704.cをダウンロードした。
 
 ![06b2e50269c703a0e10cadab1506cac9.png](../_resources/06b2e50269c703a0e10cadab1506cac9.png)
 
