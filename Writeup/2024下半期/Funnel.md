@@ -89,4 +89,4 @@ PostgreSQLに接続。flagを入手
 
 SELECT * FROM flag;
 
-![619651207f132284b358c3d00743a9a9.png](../_resources/619651207f132284b358c3d00743a9a9.png)
+![619651207f132284b358c3d00743a9a9.png](/_resources/619651207f132284b358c3d00743a9a9.png)
