@@ -2,7 +2,7 @@
 
 対象マシンのポートをスキャン
 ```$=10.10.10.245 ip=$ip nmap -sC -sV -p- -Pn $ip```
-![a6ded0fbe1c3a6f17b93e232e82b2432.png](../_resources/a6ded0fbe1c3a6f17b93e232e82b2432.png)
+![a6ded0fbe1c3a6f17b93e232e82b2432.png](/_resources/a6ded0fbe1c3a6f17b93e232e82b2432.png)
 上記コマンドからTCPポートが3つ開いていることを確認
 
 `ftp $ip`
